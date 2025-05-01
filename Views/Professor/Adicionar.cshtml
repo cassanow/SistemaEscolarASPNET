@@ -1,0 +1,42 @@
+﻿@model Professor
+@{
+    if (Model.Id > 0)
+    {
+        ViewData["Title"] = "Editar Pessoa";
+    }
+    else
+    {
+        ViewData["Title"] = "Criar Pessoa";
+    }
+}
+
+<h2>
+    @if (Model.Id > 0)
+    {
+        <text>Editar Professor</text>
+    }
+    else
+    {
+        <text>Adicionar Professor</text>
+    }
+</h2>
+<form asp-action="Adicionar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Nome" for="exampleInputEmail1" class="form-label">Nome</label>
+        <input asp-for="Nome" type="text" class="form-control" id="exampleInputEmail1">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Telefone" class="form-label">Telefone</label>
+        <input asp-for="Telefone" type="number" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Disciplina" class="form-label">Disciplina</label>
+        <input asp-for="Disciplina" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Confirmar</button>
+</form>

@@ -7,10 +7,11 @@ public interface IProfessorRepository
     Task Adicionar(Professor professor);
     
     Task Atualizar(Professor professor);
+
+    Task<Professor> GetById(int id);
     
     Task Remover(int id);
     
     Task <List<Professor>> Listar();
-
-    Task SaveAsync();
+    
 }

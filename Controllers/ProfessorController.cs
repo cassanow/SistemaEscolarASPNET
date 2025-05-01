@@ -13,10 +13,10 @@ public class ProfessorController : Controller
         _repository = repository;
     }
     
-    // GET
+    [HttpGet]
     public IActionResult Adicionar()
     {
-        return View();
+        return View((new Professor()));
     }
 
     [HttpPost]
@@ -24,45 +24,38 @@ public class ProfessorController : Controller
     public async Task<IActionResult> Adicionar(Professor professor)
     {
         if (ModelState.IsValid)
-        { 
+        {
+            if (professor.Id > 0)
+            {
+                await _repository.Atualizar(professor);
+                return RedirectToAction("Listar");
+            }
             await _repository.Adicionar(professor);
-            await _repository.SaveAsync();
             return RedirectToAction("Listar");
         }
         
-        return View(professor);
-    }
-
-    public IActionResult Atualizar()
-    {
-        return View();
+        return View("Adicionar", professor);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Atualizar(Professor professor)
+    public async Task<IActionResult> Atualizar(int id)
     {
-        if (ModelState.IsValid)
+        var professor = await _repository.GetById(id);
+        if (professor == null)
         {
-            await _repository.Atualizar(professor);
-            await _repository.SaveAsync();
-            return RedirectToAction("Listar");
+            ModelState.AddModelError("", "Pessoa não encontrada!");
+            return View();  
         }
-
-        return View(professor);
+        return View("Adicionar", professor);    
     }
-
-    public IActionResult Remover()
-    {
-        return View();
-    }
+    
     
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Remover(int id)
     {
         await _repository.Remover(id);
-        await _repository.SaveAsync();
         return RedirectToAction("Listar");
     }
 

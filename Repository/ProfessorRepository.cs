@@ -13,7 +13,7 @@ public class ProfessorRepository : IProfessorRepository
     {
         _context = context;
     }
-    
+
     public async Task Adicionar(Professor professor)
     {
         _context.Professor.Add(professor);
@@ -22,8 +22,13 @@ public class ProfessorRepository : IProfessorRepository
 
     public async Task Atualizar(Professor professor)
     {
-        _context.Professor.Update(professor);
+        _context.Entry(professor).State = EntityState.Modified;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<Professor> GetById(int id)
+    {
+        return await _context.Professor.FindAsync(id);
     }
 
     public async Task Remover(int id)
@@ -34,7 +39,7 @@ public class ProfessorRepository : IProfessorRepository
             _context.Professor.Remove(professor);
             await _context.SaveChangesAsync();
         }
-        
+
     }
 
     public async Task<List<Professor>> Listar()
@@ -42,8 +47,4 @@ public class ProfessorRepository : IProfessorRepository
         return await _context.Professor.ToListAsync();
     }
 
-    public async Task SaveAsync()
-    {
-        await _context.SaveChangesAsync();
-    }
 }
