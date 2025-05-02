@@ -7,6 +7,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Email</th>
         <th scope="col">Telefone</th>
+        <th scope="col">Disciplina</th>
         <th scope="col">Editar</th>
         <th scope="col">Remover</th>
     </tr>
@@ -14,6 +15,7 @@
     @foreach (var professor in Model)
     {
         <tr>
+            <td>@professor.Id</td>
             <td>@professor.Nome</td>
             <td>@professor.Email</td>
             <td>@professor.Telefone</td>
@@ -24,7 +26,8 @@
                 </form>
             </td>
             <td>
-                <form asp-action="Remover" asp-route-id="@professor.Id" method="post" class="d-inline">
+                <form asp-action="Remover" asp-route-id="@professor.Id" method="post" onsubmit="return confirm('Certeza que deseja excluir @professor.Nome?')" class="d-inline">
+                    <input type="hidden" name="id" value="@professor.Id" />
                     <button type="submit" class="btn btn-sm btn-danger">Remover</button>
                 </form>
             </td>

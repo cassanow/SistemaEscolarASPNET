@@ -25,18 +25,22 @@
     <div class="mb-3">
         <label asp-for="Nome" for="exampleInputEmail1" class="form-label">Nome</label>
         <input asp-for="Nome" type="text" class="form-control" id="exampleInputEmail1">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Nome)</span>
     </div>
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email</label>
         <input asp-for="Email" type="email" class="form-control">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
     </div>
     <div class="mb-3">
         <label asp-for="Telefone" class="form-label">Telefone</label>
         <input asp-for="Telefone" type="number" class="form-control">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Telefone)</span>
     </div>
     <div class="mb-3">
         <label asp-for="Disciplina" class="form-label">Disciplina</label>
         <input asp-for="Disciplina" type="text" class="form-control">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Disciplina)</span>
     </div>
     <button type="submit" class="btn btn-primary">Confirmar</button>
 </form>

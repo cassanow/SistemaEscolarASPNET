@@ -42,14 +42,8 @@ public class ProfessorController : Controller
     public async Task<IActionResult> Atualizar(int id)
     {
         var professor = await _repository.GetById(id);
-        if (professor == null)
-        {
-            ModelState.AddModelError("", "Pessoa não encontrada!");
-            return View();  
-        }
         return View("Adicionar", professor);    
     }
-    
     
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -58,7 +52,7 @@ public class ProfessorController : Controller
         await _repository.Remover(id);
         return RedirectToAction("Listar");
     }
-
+    
     public async Task<IActionResult> Listar()
     {
         var professor =  await _repository.Listar();
