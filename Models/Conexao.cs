@@ -12,4 +12,5 @@ public class Conexao : DbContext
     
     public DbSet<Professor> Professor { get; set; }
     
+    public DbSet<Aluno> Aluno { get; set; }
 }

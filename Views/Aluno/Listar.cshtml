@@ -1,0 +1,38 @@
+﻿@model List<Aluno>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">RA</th>
+        <th scope="col">Email</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Remover</th>
+    </tr>
+    </thead>
+    @foreach (var aluno in Model)
+    {
+        <tr>
+            <td>@aluno.Id</td>
+            <td>@aluno.Nome</td>
+            <td>@aluno.RA</td>
+            <td>@aluno.Email</td>
+            <td>
+                <form asp-action="Atualizar" asp-route-id="@aluno.Id" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-warning">Editar</button>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Remover" asp-route-id="@aluno.Id" method="post" onsubmit="return confirm('Certeza que deseja excluir @aluno.Nome?')" class="d-inline">
+                    <input type="hidden" name="id" value="@aluno.Id" />
+                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    <a href="@Url.Action("Adicionar", "Aluno")" class="btn btn-primary">Cadastrar Aluno</a>
+</div>

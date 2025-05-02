@@ -1,0 +1,41 @@
+﻿@model Aluno
+@{
+    if (Model.Id > 0)
+    {
+        ViewData["Title"] = "Editar Aluno";
+    }
+    else
+    {
+        ViewData["Title"] = "Adicionar Aluno";
+    }
+}
+
+<h2>
+    @if (Model.Id > 0)
+    {
+        <text>Editar Aluno</text>
+    }
+    else
+    {
+        <text>Adicionar Aluno</text>
+    }
+</h2>
+<form asp-action="Adicionar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Nome" for="exampleInputEmail1" class="form-label">Nome</label>
+        <input asp-for="Nome" type="text" class="form-control" id="exampleInputEmail1">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Nome)</span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="RA" class="form-label">RA</label>
+        <input asp-for="RA" type="number" class="form-control">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.RA)</span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control">
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Confirmar</button>
+</form>
