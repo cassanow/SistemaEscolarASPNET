@@ -20,6 +20,5 @@ O sistema simula funcionalidades básicas de um sistema escolar e está em fase 
 Cadastro, leitura, atualização e exclusão de:
 
 - Alunos  
-- Professores  
-
-Mapeamento com Entity Framework Core
+- Professores
+- Mapeamento com Entity Framework Core
